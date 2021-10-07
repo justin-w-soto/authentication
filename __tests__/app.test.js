@@ -12,3 +12,14 @@ describe('alchemy-app routes', () => {
     pool.end();
   });
 });
+
+it('should sign up a new user with a POST', async () => {
+  const res = await request(app)
+  .post('/api/v1/auth/signup')
+  .send({ email: 'banana@fruit.com', password: 'fruitlord_420' });
+
+  expect(res.body).toEqual({
+    id: expect.any(String), 
+    email: 'banana@fruit.com'
+  })
+})
