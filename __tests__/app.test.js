@@ -8,7 +8,8 @@ describe('alchemy-app routes', () => {
     return setup(pool);
   });
 
-  
+ // ----------------------------------------------------------------->>
+
   it('should sign up a new user with a POST', async () => {
     const res = await request(app)
     .post('/api/v1/auth/signup')
@@ -20,9 +21,15 @@ describe('alchemy-app routes', () => {
     })
   })
 
+  // ----------------------------------------------------------------->>
 
 
   
+  // ----------------------------------------------------------------->>
+
+
+
+
   afterAll(() => {
     pool.end();
   });
