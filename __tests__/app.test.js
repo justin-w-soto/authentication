@@ -49,31 +49,44 @@ describe('alchemy-app routes', () => {
 
   // ----------------------------------------------------------------->>
 
-  // it('should log a user in using a POST', async () => {
-  //   await UserService.create({
-  //     email: 'banana@fruit.com',
-  //     password: 'fruitlord_420' 
-  //   })
- 
+  it('should log a user in using a POST', async () => {
+    await UserService.create({
+      email: 'banana@fruit.com',
+      password: 'fruitlord_420' 
+    })
 
-  //   const res = await request(app)
-  //   .post('.api/v1/auth/login')
-  //   .send({
-  //     email: 'banana@fruit.com',
-  //     password: 'fruitlord_420' 
-  //   })
+    const res = await request(app)
+    .post('/api/v1/auth/login')
+    .send({
+      email: 'banana@fruit.com',
+      password: 'fruitlord_420' 
+    })
   
 
-  //   expect(res.body).toEqual({
-  //     id: expect.any(String),
-  //     email: 'banana@fruit.com'
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      email: 'banana@fruit.com'
       
-  //   })
-  // })
+    })
+  })
 
   // ----------------------------------------------------------------->>
 
+  it('should error 401 if wrong email or password is provided', async () => {
+    await UserService.create({
+      email: 'banana@fruit.com',
+      password: 'fruitlord_420' 
+    });
 
+    const res = await request(app)
+      .post('/api/auth/login')
+      .send({
+        email: 'banana@fruit.com',
+        password: 'fruitlord_420' 
+      });
+
+    expect(res.status).toEqual(401);
+  });
 
 
   afterAll(() => {
