@@ -106,7 +106,8 @@ describe('alchemy-app routes', () => {
     const res = await agent.get('/api/v1/auth/me');
 
     expect(res.body).toEqual({
-      id: expect.any(String)
+      id: expect.any(String), 
+      email: 'banana@fruit.com'
     })
   })
 
