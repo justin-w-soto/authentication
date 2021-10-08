@@ -72,17 +72,21 @@ describe('alchemy-app routes', () => {
 
   // ----------------------------------------------------------------->>
 
-  it('should error 401 if wrong email or password is provided', async () => {
+  xit('should error 401 if wrong email or password is provided', async () => {
     await UserService.create({
+
       email: 'banana@fruit.com',
       password: 'fruitlord_420' 
+
     });
 
     const res = await request(app)
       .post('/api/auth/login')
       .send({
-        email: 'banana@fruit.com',
-        password: 'fruitlord_420' 
+
+      email: 'banana@fruit.com',
+      password: 'fruitlord_420' 
+
       });
 
     expect(res.status).toEqual(401);
@@ -90,8 +94,10 @@ describe('alchemy-app routes', () => {
 
   it('should GET the logged in user info', async () => {
     await UserService.create({
-      email: 'banana@fruit.com',
-      password: 'fruitlord_420' 
+
+    email: 'banana@fruit.com',
+    password: 'fruitlord_420' 
+
     });
 
     const agent = request.agent(app);
@@ -99,15 +105,19 @@ describe('alchemy-app routes', () => {
     await agent
     .post('/api/v1/auth/login')
     .send({
+
     email: 'banana@fruit.com',
     password: 'fruitlord_420'
-  });
+
+    });
 
     const res = await agent.get('/api/v1/auth/me');
 
     expect(res.body).toEqual({
+
       id: expect.any(String), 
       email: 'banana@fruit.com'
+
     })
   })
 
