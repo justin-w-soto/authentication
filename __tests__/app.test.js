@@ -88,6 +88,27 @@ describe('alchemy-app routes', () => {
     expect(res.status).toEqual(401);
   });
 
+  it('should GET the logged in user info', async () => {
+    await UserService.create({
+      email: 'banana@fruit.com',
+      password: 'fruitlord_420' 
+    });
+
+    const agent = request.agent(app);
+
+    await agent
+    .post('/api/v1/auth/login')
+    .send({
+    email: 'banana@fruit.com',
+    password: 'fruitlord_420'
+  });
+
+    const res = await agent.get('/api/v1/auth/me');
+
+    expect(res.body).toEqual({
+      id: expect.any(String)
+    })
+  })
 
   afterAll(() => {
     pool.end();
